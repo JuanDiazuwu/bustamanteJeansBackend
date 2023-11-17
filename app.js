@@ -11,6 +11,7 @@ const JwtKey = "57a48587453fd4e544b8e3f2db8d2ca9";
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const rolesRouter = require('./routes/roles');
+const productsRouter = require('./routes/products')
 
 const app = express();
 
@@ -42,7 +43,8 @@ app.use(expressjwt({secret:JwtKey, algorithms:['HS256']}).unless({path:['/login'
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/roles', rolesRouter)
+app.use('/roles', rolesRouter);
+app.use('/products', productsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

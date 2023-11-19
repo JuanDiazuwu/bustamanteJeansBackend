@@ -1,5 +1,5 @@
 const express = require('express');
-const Catalog = require('../models/catalog')
+const Inventory = require('../models/inventory')
 const Product = require('../models/product');
 
 async function create(req, res, next){
@@ -7,35 +7,35 @@ async function create(req, res, next){
 
     let product = await Product.find({ "_id": { $in: productsId }});
 
-    let catalog = new Catalog({
+    let inventory = new Inventory({
         product:product
     });
-    catalog.save().then(obj => res.status(200).json({
-        message: "Catalogo almacenado correctamente",
+    inventory.save().then(obj => res.status(200).json({
+        message: "Inventario almacenado correctamente",
         obj: obj
     })).catch(ex => res.status(500).json({
-        message: "No se puedo crear el catalogo",
+        message: "No se puedo crear el inventario",
         obj:ex
     }));
 }
 
 function list(req, res, next) {
-    Catalog.find().then(objs => res.status(200).json({
-        message:"Lista de catalogos",
+    Inventory.find().then(objs => res.status(200).json({
+        message:"Lista de inventario",
         obj:objs
     })).catch(ex => res.status(500).json({
-        message:"No se puedo consultar la lista de catalogos",
+        message:"No se puedo consultar la lista de inventarios",
         obj:ex
     }));
 }
 
 function index(req, res, next){
     const id = req.params.id;
-    Catalog.findOne({"_id":id}).then(obj => res.status(200).json({
-        message:`Catalogo con el id ${id}`,
+    Inventory.findOne({"_id":id}).then(obj => res.status(200).json({
+        message:`Inventario con el id ${id}`,
         obj:obj
     })).catch(ex => res.status(500).json({
-        message:`No se puedo consultar el catalogo con el id: ${id}`,
+        message:`No se puedo consultar el inventario con el id: ${id}`,
         obj:ex
     }));
 }
@@ -43,15 +43,15 @@ function index(req, res, next){
 function replace(req, res, next){
     const id = req.params.id;
     let productsId = req.body.productsId ? req.body.productsId : "";
-    let catalog = new Object({
+    let inventory = new Object({
         _products:productsId
     });
-    Catalog.findOneAndUpdate({"_id":id}, catalog, {new:true})
+    Inventory.findOneAndUpdate({"_id":id}, inventory, {new:true})
             .then(obj => res.status(200).json({
-                message:`Catalogo reemplazado correctamente, con el id: ${id}`,
+                message:`Inventario reemplazado correctamente, con el id: ${id}`,
                 obj:obj
             })).catch(ex => res.status(500).json({
-                message:`No se puedo reemplazar el catalogo con el id: ${id}`,
+                message:`No se puedo reemplazar el inventario con el id: ${id}`,
                 obj:ex
             }));
 }
@@ -59,25 +59,25 @@ function replace(req, res, next){
 function update(req, res, next){
     const id = req.params.id;
     let productsId = req.body.productsId;
-    let catalog = new Object();
-    if(productsId) catalog._products = productsId;
-    Catalog.findOneAndUpdate({"_id":id}, catalog)
+    let inventory = new Object();
+    if(productsId) inventory._products = productsId;
+    Inventory.findOneAndUpdate({"_id":id}, inventory)
             .then(obj => res.status(200).json({
-                message:`Catalogo actualizado corretamente, con el id: ${id}`,
+                message:`Inventario actualizado corretamente, con el id: ${id}`,
                 obj:obj
             })).catch(ex => res.status(500).json({
-                message:`No se puedo actualizar el catalogo con el id: ${id}`,
+                message:`No se puedo actualizar el inventario con el id: ${id}`,
                 obj:ex
             }));
 }
 
 function destroy(req, res, next){
     const id = req.params.id;
-    Catalog.findByIdAndRemove({"_id":id}).then(obj => res.status(200).json({
-        message:`Catalogo eliminado correctamente, contaba con el id: ${id}`,
+    Inventory.findByIdAndRemove({"_id":id}).then(obj => res.status(200).json({
+        message:`Inventario eliminado correctamente, contaba con el id: ${id}`,
         obj:obj
     })).catch(ex => res.status(500).json({
-        message:`No se puedo eliminar el catalogo con el id: ${id}`,
+        message:`No se puedo eliminar el inventario con el id: ${id}`,
         obj:ex
     }));
 }

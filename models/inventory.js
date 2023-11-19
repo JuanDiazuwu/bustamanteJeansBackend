@@ -7,7 +7,7 @@ const schema = mongoose.Schema({
     }]
 });
 
-class Catalog {
+class Inventory {
     constructor(products){
         this._products = products;
     }
@@ -17,5 +17,5 @@ class Catalog {
 
 }
 
-schema.loadClass(Catalog);
-module.exports = mongoose.model('Catalog', schema);
+schema.loadClass(Inventory);
+module.exports = mongoose.model('Inventory', schema);

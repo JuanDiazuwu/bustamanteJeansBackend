@@ -24,7 +24,7 @@ function list(req, res, next) {
         message:"Lista de inventario",
         obj:objs
     })).catch(ex => res.status(500).json({
-        message:"No se puedo consultar la lista de inventarios",
+        message:"No se pudo consultar la lista de inventarios",
         obj:ex
     }));
 }
@@ -35,7 +35,7 @@ function index(req, res, next){
         message:`Inventario con el id ${id}`,
         obj:obj
     })).catch(ex => res.status(500).json({
-        message:`No se puedo consultar el inventario con el id: ${id}`,
+        message:`No se pudo consultar el inventario con el id: ${id}`,
         obj:ex
     }));
 }

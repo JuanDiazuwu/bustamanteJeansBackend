@@ -8,7 +8,7 @@ async function create(req, res, next){
     let product = await Product.find({ "_id": { $in: productsId }});
 
     let catalog = new Catalog({
-        product:product
+        _products:product
     });
     catalog.save().then(obj => res.status(200).json({
         message: "Catalogo almacenado correctamente",

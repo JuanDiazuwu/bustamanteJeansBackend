@@ -17,5 +17,11 @@ const authMiddleware = (source, typePermissions) => async (req, res, next) => {
     }
 }
 
+/*const authMiddleware = (source, typePermissions) => async (req, res, next) => {
+    if(source && typePermissions){
+        next();
+    }
+}*/
+
 module.exports = authMiddleware;
     

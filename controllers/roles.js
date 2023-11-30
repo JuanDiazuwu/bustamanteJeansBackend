@@ -19,10 +19,10 @@ async function create(req, res, next){
 
 function list(req, res, next) {
     Role.find().then(objs => res.status(200).json({
-        message:"Lista de usuarios",
+        message:"Lista de roles",
         obj:objs
     })).catch(ex => res.status(500).json({
-        message:"No se puedo consultar la lista de usuarios",
+        message:"No se puedo consultar la lista de roles",
         obj:ex
     }));
 }
@@ -40,7 +40,14 @@ function update(req, res, next){
 }
 
 function destroy(req, res, next){
-    res.send('Users destroy')
+    const id = req.params.id;
+    Role.findByIdAndDelete({"_id":id}).then(obj => res.status(200).json({
+        message:`Rol eliminado correctamente, contaba con el id: ${id}`,
+        obj:obj
+    })).catch(ex => res.status(500).json({
+        message:`No se puedo eliminar el rol con el id: ${id}`,
+        obj:ex
+    }));
 }
 
 module.exports = {

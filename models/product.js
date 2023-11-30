@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const enumCategory = ['Patalon', 'Accesorio', 'Calzado'];
+const enumCategory = ['Pantalon', 'Accesorio', 'Calzado'];
 
 const schema = mongoose.Schema({
     _name:String,
